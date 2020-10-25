@@ -19,7 +19,7 @@ export default abstract class DumbNodeRPCBaseServer {
   protected addRoute(route: string, service: (request: any) => Promise<any>) {
     this.router.post(route, async (ctx) => {
       this.logger.info(`Request ${route}`, ctx.request.body);
-      const result = await service(ctx.body);
+      const result = await service(ctx.request.body);
       ctx.response.status = 200;
       ctx.response.body = result;
     });
