@@ -1,4 +1,4 @@
-import DumbNodeRPCBaseServer from '../src/index';
+import DumbNodeRPCBaseServer from '../index';
 
 class TestServer extends DumbNodeRPCBaseServer {
   constructor() {
