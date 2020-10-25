@@ -1,6 +1,6 @@
 {
   "name": "@danielemeryau/dumb-node-rpc-base-server",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "The base server used by dumb-node-rpc",
   "main": "dist/index.js",
   "scripts": {
