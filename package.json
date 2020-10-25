@@ -1,0 +1,35 @@
+{
+  "name": "@danielemeryau/dumb-node-rpc-base-server",
+  "version": "0.0.1",
+  "description": "The base server used by dumb-node-rpc",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "npx tsc",
+    "integration-test": "npx ts-node ./test/integration-test",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielemery/dumb-node-rpc-base-server.git"
+  },
+  "author": "Daniel Emery <danielremery@gmail.com>",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/danielemery/dumb-node-rpc-base-server/issues"
+  },
+  "homepage": "https://github.com/danielemery/dumb-node-rpc-base-server#readme",
+  "devDependencies": {
+    "@danielemeryau/prettier-config": "0.0.6",
+    "@types/koa": "^2.11.6",
+    "@types/koa-bodyparser": "^4.3.0",
+    "@types/koa__router": "^8.0.3",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.3"
+  },
+  "dependencies": {
+    "@danielemeryau/logger": "^0.1.1",
+    "@koa/router": "^9.4.0",
+    "koa": "^2.13.0",
+    "koa-bodyparser": "^4.3.0"
+  }
+}
