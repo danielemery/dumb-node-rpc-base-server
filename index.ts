@@ -2,6 +2,7 @@ import Koa from 'koa';
 import Router from '@koa/router';
 import Logger from '@danielemeryau/logger';
 import bodyParser from 'koa-bodyparser';
+import dateParser from './src/middlewares/dateParser.middleware';
 
 export default abstract class DumbNodeRPCBaseServer {
   private koa: Koa;
@@ -27,6 +28,7 @@ export default abstract class DumbNodeRPCBaseServer {
 
   public listen() {
     this.koa.use(bodyParser());
+    this.koa.use(dateParser);
     this.koa.use(this.router.routes());
 
     this.logger.info(`Application listening on ${this.port}`);
