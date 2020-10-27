@@ -10,6 +10,10 @@ jobs:
           command: |
             npm ci
             npm run build
+      - run:
+          name: Run Integration Tests
+          command: |
+            npm run integration-test
       - persist_to_workspace:
           root: .
           paths:
