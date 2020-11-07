@@ -10,23 +10,27 @@ const PORT = 3000;
 
 const BASE_URL = `http://localhost:${PORT}`;
 
-const SAMPLE_OBJECT = {
+const MOCK_OBJECT = {
   value: 'test',
 };
-const SAMPLE_OBJECT_WITH_DATE = {
+const MOCK_OBJECT_WITH_DATE = {
   testDate: new Date(),
+};
+const MOCK_VERSION_INFO = {
+  server: 'v1.0.0',
+  library: 'v3.5',
 };
 
 class TestServer extends DumbNodeRPCBaseServer {
   constructor() {
-    super('integration-test-server', PORT);
+    super('integration-test-server', PORT, MOCK_VERSION_INFO);
 
     this.addRoute('/Get', async () => {
-      return Promise.resolve(SAMPLE_OBJECT);
+      return Promise.resolve(MOCK_OBJECT);
     });
 
     this.addRoute('/MustBeSampleObjectWithDate', async (request) => {
-      assert.deepEqual(request, SAMPLE_OBJECT_WITH_DATE);
+      assert.deepEqual(request, MOCK_OBJECT_WITH_DATE);
       return;
     });
   }
@@ -37,12 +41,17 @@ async function performTest() {
   test.listen();
 
   const getResponse = await axios.post(`${BASE_URL}/Get`, {});
-  assert.deepEqual(getResponse.data, SAMPLE_OBJECT);
+  assert.deepEqual(getResponse.data, MOCK_OBJECT);
+  assert.equal(getResponse.status, 200);
 
   await axios.post(
     `${BASE_URL}/MustBeSampleObjectWithDate`,
-    SAMPLE_OBJECT_WITH_DATE,
+    MOCK_OBJECT_WITH_DATE,
   );
+
+  const versionResponse = await axios.get(`${BASE_URL}/version`);
+  assert.deepEqual(versionResponse.data, MOCK_VERSION_INFO);
+  assert.equal(versionResponse.status, 200);
 }
 
 testLogger.info('Starting integration test');
