@@ -1,11 +1,13 @@
 import { assert } from 'chai';
-
 import axios from 'axios';
-import Logger from '@danielemeryau/logger';
 
-import DumbNodeRPCBaseServer from '../index';
+import { Logger } from '@danielemeryau/logger';
+import { packageRequestContainer, packageResponseReturnValue } from '@danielemeryau/dumb-node-rpc-shared-types';
+
+import { DumbNodeRPCBaseServer } from '../index';
 
 const testLogger = new Logger('integration-test');
+const testServerLogger = new Logger('integration-test/server');
 const PORT = 3000;
 
 const BASE_URL = `http://localhost:${PORT}`;
@@ -23,7 +25,10 @@ const MOCK_VERSION_INFO = {
 
 class TestServer extends DumbNodeRPCBaseServer {
   constructor() {
-    super('integration-test-server', PORT, MOCK_VERSION_INFO);
+    super(testServerLogger, PORT, 'v1.2.3', {
+      parseDates: true,
+      versionInfo: MOCK_VERSION_INFO,
+    });
 
     this.addRoute('/Get', async () => {
       return Promise.resolve(MOCK_OBJECT);
@@ -40,8 +45,8 @@ async function performTest() {
   const test = new TestServer();
   test.listen();
 
-  const getResponse = await axios.post(`${BASE_URL}/Get`, {});
-  assert.deepEqual(getResponse.data, MOCK_OBJECT);
+  const getResponse = await axios.post(`${BASE_URL}/Get`, packageRequestContainer({}, 'v1.2.1'));
+  assert.deepEqual(getResponse.data, packageResponseReturnValue(MOCK_OBJECT));
   assert.equal(getResponse.status, 200);
 
   await axios.post(

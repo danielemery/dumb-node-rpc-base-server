@@ -9,7 +9,7 @@
     "strict": true,
     "esModuleInterop": true,
     "types": ["node"],
-    "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
+    "forceConsistentCasingInFileNames": true
   },
   "exclude": ["test"]
 }

@@ -19,7 +19,8 @@
   },
   "homepage": "https://github.com/danielemery/dumb-node-rpc-base-server#readme",
   "dependencies": {
-    "@danielemeryau/logger": "^0.1.1",
+    "@danielemeryau/dumb-node-rpc-shared-types": "0.0.1",
+    "@danielemeryau/logger": "^0.2.0",
     "@koa/router": "^10.0.0",
     "date-fns": "^2.16.1",
     "koa": "^2.13.0",
